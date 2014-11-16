@@ -1,0 +1,68 @@
+{% extends "problems/base.html" %}
+{% block title %}Algospot problems{% endblock %}
+{% block content %}
+<div id="load-screen" data-ng-show="!loaded">
+	<div id="load-content">데이터를 불러오고 있습니다.</div>
+</div>
+<h1>알고스팟 문제들</h1>
+<div class="row">
+	<div class="col-xs-12">
+		<div class="row">
+		<div class="col-xs-12">
+		<div class="filters col-xs-12">
+			<form class="form-horizontal col-xs-12">
+				<div class="form-group">
+					<label class="col-xs-3 col-md-1 filter filter-label">Submitted</label>
+					<div class="col-xs-9 col-md-11">
+					<input type="number" class="form-control filter filter-input" id="submitted-min" data-ng-model="submittedRange.min">
+					<span class="filter filter-symbol">~</span>
+					<input type="number" class="form-control filter filter-input" id="submitted-max" data-ng-model="submittedRange.max">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-3 col-md-1 filter filter-label">Ratio</label>
+					<div class="col-xs-9 col-md-11">
+					<input type="number" class="form-control filter filter-input" id="ratio-min" data-ng-model="ratioRange.min">
+					<span class="filter filter-symbol">~</span>
+					<input type="number" class="form-control filter filter-input" id="ratio-max" data-ng-model="ratioRange.max">
+					</div>
+				</div>
+			</form>
+		</div>
+		</div>
+		</div>
+		<div class="row">
+		<div class="col-xs-12">
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+						<th class="sortable" data-ng-class="{'sort-asc':predicate=='keyword'&&!reverse,'sort-dec':predicate=='keyword'&&reverse}"><a	href="#" data-ng-click="predicate='keyword'; reverse=!reverse" class="sort-link">ID</a></th>
+						<th class="sortable" data-ng-class="{'sort-asc':predicate=='name'&&!reverse,'sort-dec':predicate=='name'&&reverse}"><a href="#" data-ng-click="predicate='name'; reverse=!reverse" class="sort-link">Name</th>
+						<th class="sortable" data-ng-class="{'sort-asc':predicate=='source'&&!reverse,'sort-dec':predicate=='source'&&reverse}"><a href="#" data-ng-click="predicate='source'; reverse=!reverse" class="sort-link">Source</th>
+						<th>Category</th>
+						<th class="sortable" data-ng-class="{'sort-asc':predicate=='submitted'&&!reverse,'sort-dec':predicate=='submitted'&&reverse}"><a href="#" data-ng-click="predicate='submitted'; reverse=!reverse" class="sort-link">Submitted</th>
+						<th class="sortable" data-ng-class="{'sort-asc':predicate=='accepted'&&!reverse,'sort-dec':predicate=='accepted'&&reverse}"><a href="#" data-ng-click="predicate='accepted'; reverse=!reverse" class="sort-link">Accepted</th>
+						<th class="sortable" data-ng-class="{'sort-asc':predicate=='ratio'&&!reverse,'sort-dec':predicate=='ratio'&&reverse}"><a href="#" data-ng-click="predicate='ratio'; reverse=!reverse" class="sort-link">Ratio</th>
+						<tr>
+					</thead>
+					<tbody>
+						<tr data-ng-repeat="problem in problems | rangeFilter:submittedRange:'submitted' | rangeFilter:ratioRange:'ratio' | orderBy:predicate:reverse">
+						<td><a data-ng-href="{$ problemLink + problem.keyword $}"	data-ng-bind="problem.keyword"></a></td>
+						<td data-ng-bind="problem.name"></td>
+						<td data-ng-bind="problem.source"></td>
+						<td>
+							<span data-ng-repeat="category in problem.category"	data-ng-bind-template="{$ category + (!$last?', ':'') $}"></span>
+						</td>
+						<td data-ng-bind="problem.submitted"></td>
+						<td data-ng-bind="problem.accepted"></td>
+						<td data-ng-bind="problem.ratio"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
