@@ -10,6 +10,30 @@ app.controller('AlgoCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.problems = data;
 	$scope.loaded = true;
   });
+  
+  $scope.loadUser = function() {
+	if(!$scope.userName)
+    {
+	  $scope.message = 'empty';
+	  $scope.user = null;
+	  for(i = 0; i < $scope.problems.length; ++i)
+	    $scope.problems[i].solved = false;
+	  return;
+	}
+
+    $http.get('user/' + $scope.userName).success(function(data) {
+      $scope.message = 'succ';
+	  $scope.user = data;
+	  $.inArray("bbb", $scope.user.problem );
+	  for(i = 0; i < $scope.problems.length; ++i)
+	    $scope.problems[i].solved = ($.inArray($scope.problems[i].keyword, $scope.user.problem) > -1);
+	}).error(function(data) {
+	  $scope.message = 'no such user';
+	  $scope.user = null;
+	  for(i = 0; i < $scope.problems.length; ++i)
+	    $scope.problems[i].solved = false;
+	});
+  };
 
   $scope.loaded = false;
   $scope.predicate = 'keyword';

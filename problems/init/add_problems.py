@@ -15,7 +15,7 @@ if __name__ == '__main__':
         problems = json.loads(f.read())
 
     for p in problems:
-        keyword = p['uid'][0].strip()
+        keyword = p['keyword'][0].strip()
         name = p['name'][0].strip()
         if p['source']:
             source = p['source'][0].strip()

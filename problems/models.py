@@ -24,4 +24,12 @@ class Problem(models.Model):
         return int(100 * self.accepted / self.submitted)
 
     def __str__(self):
-        return "{0} {1}".format(self.keyword, self.name)
+        return "{0}".format(self.keyword)
+
+class User(models.Model):
+    uid = models.IntegerField()
+    name = models.CharField(max_length=50)
+    problem = models.ManyToManyField(Problem)
+
+    def __str__(self):
+        return "{0} {1}".format(self.uid, self.name)

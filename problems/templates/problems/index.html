@@ -10,7 +10,7 @@
 		<div class="row">
 		<div class="col-xs-12">
 		<div class="filters col-xs-12">
-			<form class="form-horizontal col-xs-12">
+			<form class="form-horizontal col-xs-12" data-ng-submit="loadUser()">
 				<div class="form-group">
 					<label class="col-xs-3 col-md-1 filter filter-label">Submitted</label>
 					<div class="col-xs-9 col-md-11">
@@ -25,6 +25,14 @@
 					<input type="number" class="form-control filter filter-input" id="ratio-min" data-ng-model="ratioRange.min">
 					<span class="filter filter-symbol">~</span>
 					<input type="number" class="form-control filter filter-input" id="ratio-max" data-ng-model="ratioRange.max">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-3 col-md-1 filter filter-label">User name</label>
+					<div class="col-xs-9 col-md-11">
+					<input type="text" class="form-control filter filter-input" id="user-name" data-ng-model="userName" data-ng-change="loadUser()">
+          <button type="submit" class="btn btn-default">Submit</button>
+          <!--<span data-ng-bind="message"></span>-->
 					</div>
 				</div>
 			</form>
@@ -47,7 +55,7 @@
 						<tr>
 					</thead>
 					<tbody>
-						<tr data-ng-repeat="problem in problems | rangeFilter:submittedRange:'submitted' | rangeFilter:ratioRange:'ratio' | orderBy:predicate:reverse">
+          <tr data-ng-class="{'success':problem.solved}" data-ng-repeat="problem in problems | rangeFilter:submittedRange:'submitted' | rangeFilter:ratioRange:'ratio' | orderBy:predicate:reverse">
 						<td><a data-ng-href="{$ problemLink + problem.keyword $}"	data-ng-bind="problem.keyword"></a></td>
 						<td data-ng-bind="problem.name"></td>
 						<td data-ng-bind="problem.source"></td>
