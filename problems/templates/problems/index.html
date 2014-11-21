@@ -45,22 +45,23 @@
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
-						<th class="sortable" data-ng-class="{'sort-asc':predicate=='keyword'&&!reverse,'sort-dec':predicate=='keyword'&&reverse}"><a	href="#" data-ng-click="predicate='keyword'; reverse=!reverse" class="sort-link">ID</a></th>
-						<th class="sortable" data-ng-class="{'sort-asc':predicate=='name'&&!reverse,'sort-dec':predicate=='name'&&reverse}"><a href="#" data-ng-click="predicate='name'; reverse=!reverse" class="sort-link">Name</th>
-						<th class="sortable" data-ng-class="{'sort-asc':predicate=='source'&&!reverse,'sort-dec':predicate=='source'&&reverse}"><a href="#" data-ng-click="predicate='source'; reverse=!reverse" class="sort-link">Source</th>
+						<th class="sortable" data-ng-class="{'sort-asc':predicate=='keyword'&&!reverse,'sort-dec':predicate=='keyword'&&reverse}"><a	href="" data-ng-click="predicate='keyword'; reverse=!reverse" class="sort-link">ID</a></th>
+						<th class="sortable" data-ng-class="{'sort-asc':predicate=='name'&&!reverse,'sort-dec':predicate=='name'&&reverse}"><a href="" data-ng-click="predicate='name'; reverse=!reverse" class="sort-link">Name</th>
+						<th class="sortable" data-ng-class="{'sort-asc':predicate=='source'&&!reverse,'sort-dec':predicate=='source'&&reverse}"><a href="" data-ng-click="predicate='source'; reverse=!reverse" class="sort-link">Source</th>
 						<th>Category</th>
-						<th class="sortable" data-ng-class="{'sort-asc':predicate=='submitted'&&!reverse,'sort-dec':predicate=='submitted'&&reverse}"><a href="#" data-ng-click="predicate='submitted'; reverse=!reverse" class="sort-link">Submitted</th>
-						<th class="sortable" data-ng-class="{'sort-asc':predicate=='accepted'&&!reverse,'sort-dec':predicate=='accepted'&&reverse}"><a href="#" data-ng-click="predicate='accepted'; reverse=!reverse" class="sort-link">Accepted</th>
-						<th class="sortable" data-ng-class="{'sort-asc':predicate=='ratio'&&!reverse,'sort-dec':predicate=='ratio'&&reverse}"><a href="#" data-ng-click="predicate='ratio'; reverse=!reverse" class="sort-link">Ratio</th>
+						<th class="sortable" data-ng-class="{'sort-asc':predicate=='submitted'&&!reverse,'sort-dec':predicate=='submitted'&&reverse}"><a href="" data-ng-click="predicate='submitted'; reverse=!reverse" class="sort-link">Submitted</th>
+						<th class="sortable" data-ng-class="{'sort-asc':predicate=='accepted'&&!reverse,'sort-dec':predicate=='accepted'&&reverse}"><a href="" data-ng-click="predicate='accepted'; reverse=!reverse" class="sort-link">Accepted</th>
+						<th class="sortable" data-ng-class="{'sort-asc':predicate=='ratio'&&!reverse,'sort-dec':predicate=='ratio'&&reverse}"><a href="" data-ng-click="predicate='ratio'; reverse=!reverse" class="sort-link">Ratio</th>
 						<tr>
 					</thead>
 					<tbody>
-          <tr data-ng-class="{'success':problem.solved}" data-ng-repeat="problem in problems | rangeFilter:submittedRange:'submitted' | rangeFilter:ratioRange:'ratio' | orderBy:predicate:reverse">
+            <tr data-ng-class="{'success':problem.solved}" data-ng-repeat="problem in problems | rangeFilter:submittedRange:'submitted' | rangeFilter:ratioRange:'ratio' | orderBy:predicate:reverse">
 						<td><a data-ng-href="{$ problemLink + problem.keyword $}"	data-ng-bind="problem.keyword"></a></td>
 						<td data-ng-bind="problem.name"></td>
 						<td data-ng-bind="problem.source"></td>
 						<td>
-							<span data-ng-repeat="category in problem.category"	data-ng-bind-template="{$ category + (!$last?', ':'') $}"></span>
+							<span data-ng-show="problem.reveal" data-ng-repeat="category in problem.category"	data-ng-bind-template="{$ category + (!$last?', ':'') $}"></span>
+              <span data-ng-hide="problem.reveal || !problem.category.length"><a href="" data-ng-click="problem.reveal = !problem.reveal">보기</a></span>
 						</td>
 						<td data-ng-bind="problem.submitted"></td>
 						<td data-ng-bind="problem.accepted"></td>

@@ -1,0 +1,3 @@
+[submodule "problems/crawl/algo-crawl"]
+	path = problems/crawl/algo-crawl
+	url = https://github.com/nosiar/algo-crawl.git
