@@ -11,7 +11,7 @@ if __name__ == '__main__':
     django.setup()
 
     d = os.path.dirname(os.path.realpath(__file__))
-    with open(d + '/problems.json', 'r') as f:
+    with open(d + '/json/problem.json', 'r') as f:
         problems = json.loads(f.read())
 
     for p in problems:

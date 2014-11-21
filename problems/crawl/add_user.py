@@ -11,7 +11,7 @@ if __name__ == '__main__':
     django.setup()
 
     d = os.path.dirname(os.path.realpath(__file__))
-    with open(d + '/user11033.json', 'r') as f:
+    with open(d + '/json/user/9324.json', 'r') as f:
         user = json.loads(f.read())[0]
     
     uid = user['uid'][0].strip()
@@ -23,7 +23,10 @@ if __name__ == '__main__':
     for p in user['problems']:
         keyword = p.strip()
         
-        p = Problem.objects.get(keyword=keyword)
+        try:
+            p = Problem.objects.get(keyword=keyword)
+        except:
+            continue
         u.problem.add(p)
 
 
