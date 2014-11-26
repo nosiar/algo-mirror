@@ -1,19 +1,19 @@
 from django.db import models
 
 class Category(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20, unique=True)
 
     def __str__(self):
         return self.name
 
 class Source(models.Model):
-    name = models.CharField(max_length=150)
+    name = models.CharField(max_length=150, unique=True)
 
     def __str__(self):
         return self.name
 
 class Problem(models.Model):
-    keyword = models.CharField(max_length=50)
+    keyword = models.CharField(max_length=50, unique=True)
     name = models.CharField(max_length=100)
     submitted = models.IntegerField()
     accepted = models.IntegerField()
@@ -27,8 +27,8 @@ class Problem(models.Model):
         return "{0}".format(self.keyword)
 
 class User(models.Model):
-    uid = models.IntegerField()
-    name = models.CharField(max_length=50)
+    uid = models.IntegerField(unique=True)
+    name = models.CharField(max_length=50,unique=True)
     problem = models.ManyToManyField(Problem)
 
     def __str__(self):
