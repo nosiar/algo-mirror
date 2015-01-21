@@ -21,6 +21,8 @@ class Problem(models.Model):
     category = models.ManyToManyField(Category)
 
     def ratio(self):
+        if self.submitted == 0:
+            return 0
         return int(100 * self.accepted / self.submitted)
 
     def __str__(self):
