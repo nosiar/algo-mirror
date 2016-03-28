@@ -5,6 +5,7 @@ from problems.models import Problem, User, Source, Category
 
 cur_dir = os.path.dirname(os.path.realpath(__file__))
 
+
 def update_problem():
     problem_file = os.path.join(cur_dir, 'json/problem.json')
 
@@ -30,9 +31,12 @@ def update_problem():
 
         try:
             p = Problem.objects.get(keyword=keyword)
+            p.submitted = submitted
+            p.accepted = accepted
         except:
             p = Problem(keyword=keyword, name=name, source=s,
-                    submitted=submitted, accepted=accepted)
+                        submitted=submitted, accepted=accepted)
+        finally:
             p.save()
 
         for c in category:
@@ -42,6 +46,7 @@ def update_problem():
                 c = Category(name=c)
                 c.save()
             p.category.add(c)
+
 
 def update_user():
     user_dir = os.path.join(cur_dir, 'json/user')
