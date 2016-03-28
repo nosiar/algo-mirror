@@ -13,7 +13,7 @@ try:
 except:
     pass
 
-with open(os.path.join(cur_dir, 'users'),'r') as f:
+with open(os.path.join(cur_dir, 'users'), 'r') as f:
     uids = json.loads(f.read())
 
 os.chdir(os.path.join(cur_dir, 'algo-crawl'))
@@ -22,6 +22,6 @@ call(['scrapy', 'crawl',
       '-s', 'LOG_FILE=crawl.log', 'problem'])
 for uid in uids:
     call(['scrapy', 'crawl',
-          '-o', os.path.join(user_dir, '%d.json'%uid),
+          '-o', os.path.join(user_dir, '%d.json' % uid),
           '-s', 'LOG_FILE=crawl.log',
-          '-a', 'uid=%d'%uid, 'user'])
+          '-a', 'uid=%d' % uid, 'user'])

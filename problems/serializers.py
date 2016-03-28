@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from problems.models import Problem, Category, Source, User
+from problems.models import Problem, User
+
 
 class ProblemSerializer(serializers.ModelSerializer):
 
@@ -14,6 +15,7 @@ class ProblemSerializer(serializers.ModelSerializer):
         if obj.submitted == 0:
             return 0
         return int(100 * obj.accepted / obj.submitted)
+
 
 class UserSerializer(serializers.ModelSerializer):
 
