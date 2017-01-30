@@ -10,7 +10,7 @@ app.controller('AlgoCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.problems = data;
 	$scope.loaded = true;
   });
-  
+
   $scope.loadUser = function() {
 	if(!$scope.userName)
     {
