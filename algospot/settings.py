@@ -22,13 +22,19 @@ SECRET_KEY = '^xsa4=l^ddtwyih%o^pe)^^7&h$bg*@-@iylwn0b@n+uo@gfr2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-TEMPLATE_DEBUG = DEBUG
-
 ALLOWED_HOSTS = ['*']
 
 ADMINS = (
     ('Jonghwa Woo', 'wjh0630@gmail.com'),
 )
+
+TEMPLATES = [{
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'APP_DIRS': True,
+    'OPTIONS': {
+        'debug': DEBUG,
+    },
+}]
 
 # Application definition
 
