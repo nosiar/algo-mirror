@@ -1,5 +1,4 @@
-from django.conf.urls import include, url
-# from django.contrib import admin
+from django.urls import include, re_path
 
 urlpatterns = [
     # Examples:
@@ -7,5 +6,5 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
 
     # url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include('problems.urls', namespace='problems')),
+    re_path(r'^', include(('problems.urls', 'problems'), namespace='problems')),
 ]

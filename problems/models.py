@@ -20,7 +20,7 @@ class Problem(models.Model):
     name = models.CharField(max_length=100)
     submitted = models.IntegerField()
     accepted = models.IntegerField()
-    source = models.ForeignKey(Source)
+    source = models.ForeignKey(Source, on_delete=models.CASCADE)
     category = models.ManyToManyField(Category)
 
     def ratio(self):
